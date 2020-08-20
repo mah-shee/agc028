@@ -1,4 +1,4 @@
-use num_integer::{gcd, lcm};
+use num_integer::gcd;
 #[allow(unused_imports)]
 use proconio::marker::{Bytes, Chars, Usize1};
 use proconio::{fastout, input};
@@ -10,9 +10,22 @@ fn main() {
         s: Chars,
         t: Chars,
     }
-    let lcm = lcm(n, m);
     let gcd = gcd(n, m);
-    let mut ans: String = String::new();
+    let l = n * m / gcd;
 
-    println!("{}", ans.len());
+    let n_p = n / gcd;
+    let m_p = m / gcd;
+    let mut flag = true;
+
+    for i in 0..gcd {
+        if s[i * n_p] != t[i * m_p] {
+            flag = false;
+            break;
+        }
+    }
+    if flag {
+        println!("{}", l);
+    } else {
+        println!("-1");
+    }
 }
